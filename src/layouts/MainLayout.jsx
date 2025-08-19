@@ -4,10 +4,10 @@ import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
-const MainLayout = ({searchText, handelSearchText}) => {
+const MainLayout = ({searchText, handelSearchText,logoutUser,user}) => {
   return (
     <>
-    <NavBar searchText={searchText} handelSearchText={handelSearchText} />
+    <NavBar searchText={searchText} handelSearchText={handelSearchText} logoutUser={logoutUser} user={user} />
     <ToastContainer />
     <Outlet />
     </>
