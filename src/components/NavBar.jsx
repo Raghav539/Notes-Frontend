@@ -3,11 +3,12 @@ import { FaSquarePlus } from "react-icons/fa6";
 import { FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
-const NavBar = ({ searchText, handelSearchText, logoutUser, user }) => {
+const NavBar = ({ searchText, handelSearchText, handleLogout, user }) => {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    logoutUser();
-    navigate("/login"); // redirect after logout
+
+  const handleLogoutt = () => {
+    handleLogout();
+    // navigate("/login"); 
   };
   return (
     <nav className="navbar bg-body-tertiary py-50" style={{ padding: "20px" }}>
@@ -40,7 +41,7 @@ const NavBar = ({ searchText, handelSearchText, logoutUser, user }) => {
           <button
             className="btn btn-outline-primary btn-md"
             type="button"
-             onClick={handleLogout}
+             onClick={handleLogoutt}
           >
             <FaSignOutAlt className="me-2 fs-6" /> Logout
           </button>

@@ -24,7 +24,6 @@ const App = () => {
   const [filterText, setFilterText] = useState("");
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
- 
 
   // Create axios instance
   const axiosInstance = axios.create({
@@ -120,9 +119,9 @@ const App = () => {
   // Authentication
   const loginUser = (newToken) => {
     try {
-      console.log("Login token:", newToken); 
+      console.log("Login token:", newToken);
       const decoded = jwtDecode(newToken);
-      console.log("Decoded token:", decoded); 
+      console.log("Decoded token:", decoded);
       setToken(newToken);
       setUser(decoded);
       localStorage.setItem("token", newToken);
@@ -133,11 +132,11 @@ const App = () => {
   };
 
   const logoutUser = () => {
+    console.log("Logging out user");
     setToken(null);
     setUser(null);
     localStorage.removeItem("token");
     toast.info("Logged out");
-    
   };
 
   // Auto-login if token exists
@@ -158,8 +157,20 @@ const App = () => {
       <>
         {!token ? (
           <>
-            <Route path="/login" element={<Login onLogin={loginUser} token={token} />} />
-            <Route path="/register" element={<Register />} />
+            <Route
+              path="/"
+              element={<Login onLogin={loginUser} token={token} />}
+            >
+              <Route
+                path="login"
+                element={<Login onLogin={loginUser} token={token} />}
+              />
+              <Route path="register" element={<Register />} />
+              <Route
+                path="*"
+                element={<Login onLogin={loginUser} token={token} />}
+              />
+            </Route>
           </>
         ) : (
           <Route
@@ -183,7 +194,10 @@ const App = () => {
                 />
               }
             />
-            <Route path="add-note" element={<AddNotePage addNote={addNote} />} />
+            <Route
+              path="add-note"
+              element={<AddNotePage addNote={addNote} />}
+            />
             <Route
               path="edit-note/:slug"
               element={<EditNotePage updateNote={updateNote} />}
